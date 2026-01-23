@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { getData, getFilters } = require('../controllers/dataController');
-const { protect } = require('../middleware/authMiddleware');
 
-// Protected routes - require authentication
-router.get('/data', protect, getData);
-router.get('/filters', protect, getFilters);
+// Public data endpoints (no auth needed for dashboard read)
+router.get('/data', getData);
+router.get('/filters', getFilters);
 
 module.exports = router;
