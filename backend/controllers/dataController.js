@@ -74,8 +74,11 @@ const getFilters = async (req, res) => {
       Data.distinct('city')
     ]);
 
-    // Filter out empty strings
-    const filterEmpty = (arr) => arr.filter(item => item && item.trim() !== '');
+    // Filter out empty / null and coerce to strings to avoid trim() errors on numbers
+    const filterEmpty = (arr) =>
+      arr
+        .filter((item) => item !== null && item !== undefined && `${item}`.trim() !== '')
+        .map((item) => `${item}`);
 
     res.json({
       success: true,
