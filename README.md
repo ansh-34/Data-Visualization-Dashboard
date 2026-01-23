@@ -221,3 +221,4 @@ Built with ❤️ using the MERN stack
 ## 🐛 Issues
 
 If you encounter any issues, please create an issue in the repository.
+# prime-dashboard
