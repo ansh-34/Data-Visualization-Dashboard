@@ -74,20 +74,23 @@ const getFilters = async (req, res) => {
       Data.distinct('city')
     ]);
 
-    // Filter out empty strings
-    const filterEmpty = (arr) => arr.filter(item => item && item.trim() !== '');
+    // Normalize values to strings and drop empties/nulls to avoid trim errors
+    const sanitizeValues = (arr) =>
+      arr
+        .map((item) => (item === null || item === undefined ? '' : String(item)))
+        .filter((item) => item.trim() !== '');
 
     res.json({
       success: true,
-      regions: filterEmpty(regions).sort(),
-      topics: filterEmpty(topics).sort(),
-      sectors: filterEmpty(sectors).sort(),
-      pestles: filterEmpty(pestles).sort(),
-      sources: filterEmpty(sources).sort(),
-      countries: filterEmpty(countries).sort(),
-      endYears: filterEmpty(endYears).sort(),
-      swots: filterEmpty(swots).sort(),
-      cities: filterEmpty(cities).sort()
+      regions: sanitizeValues(regions).sort(),
+      topics: sanitizeValues(topics).sort(),
+      sectors: sanitizeValues(sectors).sort(),
+      pestles: sanitizeValues(pestles).sort(),
+      sources: sanitizeValues(sources).sort(),
+      countries: sanitizeValues(countries).sort(),
+      endYears: sanitizeValues(endYears).sort(),
+      swots: sanitizeValues(swots).sort(),
+      cities: sanitizeValues(cities).sort()
     });
   } catch (error) {
     console.error(error);
