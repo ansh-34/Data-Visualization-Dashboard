@@ -75,19 +75,4 @@ export const fetchFilters = async () => {
   }
 };
 
-export const createRecord = async (payload) => {
-  const response = await api.post('/data', payload);
-  return response.data;
-};
-
-export const updateRecord = async (id, payload) => {
-  const response = await api.put(`/data/${id}`, payload);
-  return response.data;
-};
-
-export const deleteRecord = async (id) => {
-  const response = await api.delete(`/data/${id}`);
-  return response.data;
-};
-
 export default api;
